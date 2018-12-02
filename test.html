@@ -29,8 +29,8 @@
 		const quit = document.getElementById('quit')
 		quit.onclick = () => {
 			fetch('http://localhost:6123/quit', {method: 'GET'})
+			.then(() => {window.open(self.location, '_self')})
 			.catch(error => console.error('Error:', error))
-			window.open(self.location, '_self')
 		}
 	})
 	.catch(err => {

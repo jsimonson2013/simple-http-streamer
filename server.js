@@ -25,17 +25,18 @@ app.get('/stream', (req, res) => {
 })
 
 app.post('/', (req, res, next) => {
-  fs.appendFile('stream/livestream.ogg', req.body, err => {
-		if (err) res.sendStatus(400)
-		else res.sendStatus(200)
-  })
+  fs.appendFileSync('stream/livestream.ogg', req.body)
+	res.sendStatus(200)
 })
 
 app.get('/quit', (req, res) => {
-	fs.unlinkSync('stream/livestream.ogg', err => {
-		if (err) {console.log(err); res.sendStatus(400);}
-		else res.sendStatus(200)
-	})
+	try {
+		fs.unlinkSync('stream/livestream.ogg')
+		res.sendStatus(200)
+	}
+	catch (e) {
+		res.sendStatus(400)
+	}
 })
 
 app.listen(PORT, () => {
