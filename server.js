@@ -17,7 +17,9 @@ app.get('/stream', (req, res) => {
 
 	res.writeHead(200, {
 		'Content-Type': 'audio/ogg',
-		'Content-Length': stat.size
+		'Content-Length': stat.size,
+		'Cache-Control': 'public, max-age=1',
+		'Expires': new Date(Date.now() + 1).toUTCString()
 	})
 
 	const stream = fs.createReadStream(path)

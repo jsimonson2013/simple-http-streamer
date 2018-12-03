@@ -24,6 +24,16 @@
 				}
 			})
 			.catch(error => console.error('Error:', error))
+
+			if (chunks.length % 2 == 0) {
+				const seekTime = document.getElementById('player').currentTime
+				document.getElementById('player').pause()
+				document.getElementById('player').innerHTML = ''
+				document.getElementById('player').innerHTML = `<source src="http://localhost:6123/stream/" type="audio/ogg">`
+				document.getElementById('player').load()
+				document.getElementById('player').play()
+				document.getElementById('player').currentTime = seekTime
+			}
 		}
 
 		const quit = document.getElementById('quit')
@@ -41,5 +51,6 @@
 <body>
 	<button id="record">Record</button>
 	<button id="quit">Quit</button>
+	<audio id="player" controls></audio>
 </body>
 </html>
