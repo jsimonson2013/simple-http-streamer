@@ -1,43 +1,41 @@
 <html>
 <head>
 <script>
-const constraints = { audio: true }
-let chunks = []
+// create new blob with new audio chunk, send to server
+function uploadRecording(audioChunk) {
+	const blob = new Blob(['', audioChunk], {'type' : 'audio/ogg; codec: vorbis;'})
+	fetch('http://localhost:6123/', {
+		method: 'POST',
+		body: blob,
+		headers:{
+			'Content-Type': 'application/octet-stream'
+		}
+	})
+}
 
-// request audio input
-navigator.mediaDevices.getUserMedia(constraints)
+navigator.mediaDevices.getUserMedia({ audio: true })
 .then(stream => {
-	const record = document.getElementById('record')
+	const recorder = document.getElementById('record')
 	const mediaRecorder = new MediaRecorder(stream)
 
 	// capture data in 2-second chunks
-	record.onclick = () => { mediaRecorder.start(2000) }
+	recorder.onclick = () => { mediaRecorder.start(2000) }
 
-	mediaRecorder.ondataavailable = e => {
-		chunks.push(e.data)
-
-		// create new blob with new audio chunk, send to server
-		const blob = new Blob(['', chunks[chunks.length - 1]], {'type' : 'audio/ogg; codec: vorbis;'})
-		fetch('http://localhost:6123/', {
-			method: 'POST',
-			body: blob,
-			headers:{
-				'Content-Type': 'application/octet-stream'
-			}
-		})
-	}
-
-	// deletes file and reloads tab
-	const quit = document.getElementById('quit')
-	quit.onclick = () => {
-		fetch('http://localhost:6123/quit', {method: 'GET'})
-		.then(() => {window.open(self.location, '_self')})
+	// upload new chunk when it is available
+	mediaRecorder.ondataavailable = event => {
+		uploadRecording(event.data)
 	}
 })
+
+// deletes audio file and reloads tab
+function quitRecording() {
+	fetch('http://localhost:6123/quit', {method: 'GET'})
+	.then(() => {window.open(self.location, '_self')})
+}
 </script>
 </head>
 <body>
 	<button id="record">Record</button>
-	<button id="quit">Quit</button>
+	<button id="quit" onclick="quitRecording()">Quit</button>
 </body>
 </html>
