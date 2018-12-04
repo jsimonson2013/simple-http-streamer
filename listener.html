@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>
+function streamAudio() {
+  const player = document.getElementById('player')
+
+  function streamPlayback(){
+    const seekTime = player.currentTime
+
+    // reload source, set seek time to current time
+    if (seekTime >= player.duration - 1000 || player.paused){
+      document.getElementById('player').pause()
+      document.getElementById('player').innerHTML = `<source src="http://localhost:6123/stream/" type="audio/ogg">`
+      document.getElementById('player').load()
+      document.getElementById('player').play()
+      document.getElementById('player').currentTime = seekTime
+    }
+  }
+
+  interval = setInterval(streamPlayback, 1000)
+}
+</script>
+</head>
+<body>
+  <audio id="player" controls></audio><br>
+  <button onclick="streamAudio()">Listen!</button>
+</body>
+</html>

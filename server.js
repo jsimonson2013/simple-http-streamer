@@ -15,6 +15,7 @@ app.get('/stream', (req, res) => {
 	const path = __dirname + '/stream/livestream.ogg'
 	const stat = fs.statSync(path)
 
+	// expires immediately, force request file again
 	res.writeHead(200, {
 		'Content-Type': 'audio/ogg',
 		'Content-Length': stat.size,
@@ -27,18 +28,15 @@ app.get('/stream', (req, res) => {
 })
 
 app.post('/', (req, res, next) => {
+	// append sound chunk to audio file
   fs.appendFileSync('stream/livestream.ogg', req.body)
 	res.sendStatus(200)
 })
 
 app.get('/quit', (req, res) => {
-	try {
-		fs.unlinkSync('stream/livestream.ogg')
-		res.sendStatus(200)
-	}
-	catch (e) {
-		res.sendStatus(400)
-	}
+	// delete file
+	fs.unlinkSync('stream/livestream.ogg')
+	res.sendStatus(200)
 })
 
 app.listen(PORT, () => {
