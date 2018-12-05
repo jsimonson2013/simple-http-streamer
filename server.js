@@ -28,13 +28,11 @@ app.get('/stream', (req, res) => {
 })
 
 app.post('/', (req, res, next) => {
-	// append sound chunk to audio file
 	fs.appendFileSync('stream/livestream.ogg', req.body)
 	res.sendStatus(200)
 })
 
 app.get('/quit', (req, res) => {
-	// delete file
 	fs.unlinkSync('stream/livestream.ogg')
 	res.sendStatus(200)
 })

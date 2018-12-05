@@ -1,39 +1,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-// create new blob with new audio chunk, send to server
-function uploadRecording(audioChunk, srcURL) {
-	const blob = new Blob(['', audioChunk], {'type' : 'audio/ogg; codec: vorbis;'})
-	fetch(srcURL, {
-		method: 'POST',
-		body: blob,
-		headers:{
-			'Content-Type': 'application/octet-stream'
-		}
-	})
-}
-
-// deletes audio file and reloads tab
-function quitRecording(quitURL) {
-	fetch(quitURL, {method: 'GET'})
-	.then(() => {window.open(self.location, '_self')})
-}
-
-function startAudioCapture(srcURL) {
-	navigator.mediaDevices.getUserMedia({ audio: true })
-	.then(stream => {
-		// capture data in 2-second chunks
-		const mediaRecorder = new MediaRecorder(stream)
-		mediaRecorder.start(2000)
-
-		// upload new chunk when it is available
-		mediaRecorder.ondataavailable = event => {
-			uploadRecording(event.data, srcURL)
-		}
-	})
-}
-</script>
+<script text="text/javascript" src="simple-http-stream.js"></script>
 </head>
 <body>
 	<button id="record" onclick="startAudioCapture('http://localhost:6123/')">Record</button>

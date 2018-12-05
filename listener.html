@@ -1,31 +1,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script>
-// reload source, set seek time to current time
-function updatePlayer(seekTime, player, srcURL) {
-  player.innerHTML = `<source src="${srcURL}" type="audio/ogg">`
-  player.load()
-
-  player.play()
-  .then(() => {
-    player.fastSeek(seekTime)
-  })
-}
-
-function startAudioStream(player, srcURL) {
-// request new audio if audio paused or within one second of ending
-  function streamPlayback(){
-    const seekTime = player.currentTime
-    if (seekTime >= player.duration - 3 || player.children.length < 1){
-      updatePlayer(seekTime, player, srcURL)
-    }
-  }
-
-  // every second check for new audio needed
-  interval = setInterval(streamPlayback, 3000)
-}
-</script>
+<script text="text/javascript" src="simple-http-stream.js"></script>
 </head>
 <body>
   <audio id="player" controls></audio><br>
