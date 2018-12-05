@@ -29,7 +29,7 @@ app.get('/stream', (req, res) => {
 
 app.post('/', (req, res, next) => {
 	// append sound chunk to audio file
-  fs.appendFileSync('stream/livestream.ogg', req.body)
+	fs.appendFileSync('stream/livestream.ogg', req.body)
 	res.sendStatus(200)
 })
 

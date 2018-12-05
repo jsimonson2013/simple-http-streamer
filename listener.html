@@ -17,7 +17,7 @@ function startAudioStream(player, srcURL) {
 // request new audio if audio paused or within one second of ending
   function streamPlayback(){
     const seekTime = player.currentTime
-    if (seekTime >= player.duration - 3 || player.paused){
+    if (seekTime >= player.duration - 3 || player.children.length < 1){
       updatePlayer(seekTime, player, srcURL)
     }
   }
