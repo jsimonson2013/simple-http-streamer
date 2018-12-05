@@ -1,12 +1,16 @@
 <html>
 <head>
+<meta charset="UTF-8">
 <script>
 // reload source, set seek time to current time
-function updatePlayer(seekTime) {
-  document.getElementById('player').innerHTML = `<source src="http://localhost:6123/stream/" type="audio/ogg">`
-  document.getElementById('player').load()
-  document.getElementById('player').play()
-  document.getElementById('player').currentTime = seekTime
+function updatePlayer(seekTime, player) {
+  player.innerHTML = `<source src="http://localhost:6123/stream/" type="audio/ogg">`
+  player.load()
+
+  player.play()
+  .then(() => {
+    player.fastSeek(seekTime)
+  })
 }
 
 function startAudioStream() {
@@ -16,12 +20,12 @@ function startAudioStream() {
   function streamPlayback(){
     const seekTime = player.currentTime
     if (seekTime >= player.duration - 1 || !player.src){
-      updatePlayer(seekTime)
+      updatePlayer(seekTime, player)
     }
   }
 
   // every second check for new audio needed
-  interval = setInterval(streamPlayback, 1000)
+  interval = setInterval(streamPlayback, 3000)
 }
 </script>
 </head>
