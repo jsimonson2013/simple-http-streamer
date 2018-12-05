@@ -14,29 +14,29 @@ function uploadRecording(audioChunk) {
 	})
 }
 
-navigator.mediaDevices.getUserMedia({ audio: true })
-.then(stream => {
-	const recorder = document.getElementById('record')
-	const mediaRecorder = new MediaRecorder(stream)
-
-	// capture data in 2-second chunks
-	recorder.onclick = () => { mediaRecorder.start(2000) }
-
-	// upload new chunk when it is available
-	mediaRecorder.ondataavailable = event => {
-		uploadRecording(event.data)
-	}
-})
-
 // deletes audio file and reloads tab
 function quitRecording() {
 	fetch('http://localhost:6123/quit', {method: 'GET'})
 	.then(() => {window.open(self.location, '_self')})
 }
+
+function startAudioCapture() {
+	navigator.mediaDevices.getUserMedia({ audio: true })
+	.then(stream => {
+		// capture data in 2-second chunks
+		const mediaRecorder = new MediaRecorder(stream)
+		mediaRecorder.start(2000)
+
+		// upload new chunk when it is available
+		mediaRecorder.ondataavailable = event => {
+			uploadRecording(event.data)
+		}
+	})
+}
 </script>
 </head>
 <body>
-	<button id="record">Record</button>
+	<button id="record" onclick="startAudioCapture()">Record</button>
 	<button id="quit" onclick="quitRecording()">Quit</button>
 </body>
 </html>

@@ -13,13 +13,11 @@ function updatePlayer(seekTime, player) {
   })
 }
 
-function startAudioStream() {
-  const player = document.getElementById('player')
-
-  // request new audio if audio paused or within one second of ending
+function startAudioStream(player) {
+// request new audio if audio paused or within one second of ending
   function streamPlayback(){
     const seekTime = player.currentTime
-    if (seekTime >= player.duration - 1 || !player.src){
+    if (seekTime >= player.duration - 3 || player.paused){
       updatePlayer(seekTime, player)
     }
   }
@@ -31,6 +29,6 @@ function startAudioStream() {
 </head>
 <body>
   <audio id="player" controls></audio><br>
-  <button onclick="startAudioStream()">Listen!</button>
+  <button onclick="startAudioStream(document.getElementById('player'))">Listen!</button>
 </body>
 </html>
