@@ -3,8 +3,8 @@
 <meta charset="UTF-8">
 <script>
 // reload source, set seek time to current time
-function updatePlayer(seekTime, player) {
-  player.innerHTML = `<source src="http://localhost:6123/stream/" type="audio/ogg">`
+function updatePlayer(seekTime, player, srcURL) {
+  player.innerHTML = `<source src="${srcURL}" type="audio/ogg">`
   player.load()
 
   player.play()
@@ -13,12 +13,12 @@ function updatePlayer(seekTime, player) {
   })
 }
 
-function startAudioStream(player) {
+function startAudioStream(player, srcURL) {
 // request new audio if audio paused or within one second of ending
   function streamPlayback(){
     const seekTime = player.currentTime
     if (seekTime >= player.duration - 3 || player.paused){
-      updatePlayer(seekTime, player)
+      updatePlayer(seekTime, player, srcURL)
     }
   }
 
@@ -29,6 +29,6 @@ function startAudioStream(player) {
 </head>
 <body>
   <audio id="player" controls></audio><br>
-  <button onclick="startAudioStream(document.getElementById('player'))">Listen!</button>
+  <button onclick="startAudioStream(document.getElementById('player'), 'http://localhost:6123/stream/')">Listen!</button>
 </body>
 </html>
