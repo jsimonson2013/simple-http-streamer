@@ -11,15 +11,15 @@ up-to-date version.
 
 Requires node and npm. Also, you should be using headphones to avoid feedback.
 
-From {project-root}/example/server:
+From simple-http-streamer/example/server:
 * node server
 
 In web browser:
-* navigate to file:///{path-to-project}/{project-root}/example/static/broadcaster.html
+* navigate to file:///{path-to-project}/simple-http-streamer/example/static/broadcaster.html
 * press *Record*
 
 In another tab/window/browser:
-* navigate to file:///{path-to-project}/{project-root}/example/static/listener.html
+* navigate to file:///{path-to-project}/simple-http-streamer/example/static/listener.html
 * press *Listen*
 
 At this point, you should be hearing your own audio.
