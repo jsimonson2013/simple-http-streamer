@@ -11,19 +11,19 @@ up-to-date version.
 
 Requires node and npm. Also, you should be using headphones to avoid feedback.
 
-From simple-http-streamer/example/server:
-* node server
+From `simple-http-streamer/example/server` run:
+* `node server`
 
 In web browser:
-* navigate to file:///{path-to-project}/simple-http-streamer/example/static/broadcaster.html
-* press *Record*
+* navigate to `file:///{path-to-project}/simple-http-streamer/example/static/broadcaster.html`
+* press *Record* button
 
 In another tab/window/browser:
-* navigate to file:///{path-to-project}/simple-http-streamer/example/static/listener.html
-* press *Listen!*
+* navigate to `file:///{path-to-project}/simple-http-streamer/example/static/listener.html`
+* press *Listen!* button
 
 At this point, you should be hearing your own audio.
 
 Make sure to stop the listener (refresh/close page or pause), then press *Quit*
-on the broadcaster when finished. If not, you will need to manually delete the
+button on the broadcaster when finished. If not, you will need to manually delete the
 {project-root}/example/server/stream/livestream.ogg file.
