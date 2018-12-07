@@ -20,7 +20,7 @@ In web browser:
 
 In another tab/window/browser:
 * navigate to file:///{path-to-project}/simple-http-streamer/example/static/listener.html
-* press *Listen*
+* press *Listen!*
 
 At this point, you should be hearing your own audio.
 
