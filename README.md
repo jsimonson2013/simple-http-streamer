@@ -1,12 +1,13 @@
 # Simple HTTP Streamer
 
-Streaming live media over the web can be very complex, but I want to offer an alternative. This library aims to provide simple getting-started functions to help you create livestreaming applications quickly.
+Streaming live media over the web can be very complex, but I want to offer an alternative. This library aims to provide simple getting-started functions to help you create livestreaming applications quickly without having to setup STUN/TURN servers and dedicated streaming resources.
 
 The [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API) and [MediaStream Recording API](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API) make this library possible. My hope is to provide some abstraction from those APIs and expose functions that can be used intuitively for common streaming needs.
 
 You can download the library and include it via relative path or use my hosted file at https://jacobsimonson.me/code/simple-http-streamer.js.
 
 ### Demo
+![Simple HTTP Streamer](https://i.makeagif.com/media/12-08-2018/cxcu1F.gif)
 
 ### Example
 broadcaster:
