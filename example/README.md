@@ -12,6 +12,7 @@ up-to-date version.
 Requires node and npm. Also, you should be using headphones to avoid feedback.
 
 From `simple-http-streamer/example/server` run:
+* `npm install`
 * `node server`
 
 In web browser:
